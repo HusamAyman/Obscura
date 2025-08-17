@@ -13,7 +13,7 @@ router = APIRouter(
     tags=["User Domain"]
 )
 
-@router.post("/create-new-account")
+@router.post("/create-new-account", status_code=201)
 def create_new_account(user_name: str, first_name: str, last_name: str, password: str, db: db_dependency):
     try:
         user_data = CreateAccountSchema(

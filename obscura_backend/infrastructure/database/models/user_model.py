@@ -1,11 +1,10 @@
-from ..database import Base
-from sqlalchemy import Column, Integer, String, DateTime
+from infrastructure.database.database import Base
+from sqlalchemy import Column, String
 
 class User(Base):
     __tablename__ = 'users'
 
-    user_id = Column(Integer, primary_key=True, autoincrement=True, index=True)
-    username = Column(String, unique=True, nullable=False)
+    username = Column(String, primary_key=True)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)

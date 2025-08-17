@@ -10,6 +10,16 @@ class ApplicationBug(ApplicationException):
         self.message = message
 
 class UserAlreadyExists(ApplicationException):
-    """Exception raised when a user already exists."""
-    def __init__(self, username):
+    """Exception raised when a user already exists in signup process."""
+    def __init__(self, username: str):
         super().__init__(f"User '{username}' already exists.")
+
+class UserNotFound(ApplicationException):
+    """Exception raised when the username not found in the database"""
+    def __inint__(self, username: str):
+        super().__init__(f"Uesr '{username}' does not exist")
+
+class UnAuthorizedAccess(ApplicationException):
+    """Exception raised when the user enters wrong password"""
+    def __init__(self):
+        super().__init__("UnAuthorized Access")

@@ -9,11 +9,11 @@ class UserRepository(CRUD):
         """Create a new user with the provided user_data."""
         pass
     @abstractmethod
-    def update(self, user_id: int, first_name: str, last_name: str) -> None:
+    def update(self, username: str, first_name: str, last_name: str) -> None:
         """Update an existing user with the provided user_data."""
         pass
     @abstractmethod
-    def delete(self, user_id: int, recovery_key: str) -> None:
+    def delete(self, username: str, recovery_key: str) -> None:
         """Delete a user with the provided user_data."""
         pass
     @abstractmethod
@@ -21,6 +21,6 @@ class UserRepository(CRUD):
         """Read a user with the provided user_data."""
         pass
     @abstractmethod
-    def update_password(self, user_id: int, new_password: str) -> None:
+    def update_password(self, username: str, new_password: str) -> None:
         """Update the password for an existing user."""
         pass

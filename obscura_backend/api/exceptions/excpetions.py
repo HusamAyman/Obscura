@@ -21,3 +21,15 @@ class HTTPUserAlreadyExists(HTTPException):
     def __init__(self, username: str):
         detail = f"User '{username}' already exists."
         super().__init__(status_code=status.HTTP_409_CONFLICT,detail=detail)
+
+class HTTPUserNotFound(HTTPException):
+    """Exception raised when the username not found in the system"""
+    def __init__(self, username: str):
+        detail = f"User '{username}' not found."
+        super().__init__(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
+
+class HTTPUnauthorizedAccess(HTTPException):
+    """Exception raised when the user enters wrong username or password"""
+    def __init__(self):
+        detail = "Wrong username or password."
+        super().__init__(status_code=status.HTTP_401_UNAUTHORIZED, detail=detail)

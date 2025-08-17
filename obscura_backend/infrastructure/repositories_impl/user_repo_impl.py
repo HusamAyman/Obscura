@@ -37,7 +37,6 @@ class UserRepoImpl(UserRepository):
 
     def delete(self, user_id: int, recovery_key: str) -> None:
         user = self.session.query(User).filter(User.user_id == user_id, User.recovery_key == recovery_key).first()  
-        # TODO: edit this code and add exception for user not found
         if user:
             self.session.delete(user)
             self.session.commit()
@@ -48,7 +47,6 @@ class UserRepoImpl(UserRepository):
         if user is  None:
             return None
         user_info = UserEntity(
-            user_id=user.user_id,
             username=user.username,
             first_name=user.first_name,
             last_name=user.last_name,
