@@ -33,3 +33,10 @@ class HTTPUnauthorizedAccess(HTTPException):
     def __init__(self):
         detail = "Wrong username or password."
         super().__init__(status_code=status.HTTP_401_UNAUTHORIZED, detail=detail)
+
+
+class HTTPTokenNotFound(HTTPException):
+    """Exception raised when the user token is not found in the system"""
+    def __init__(self):
+        detail = "User token not found."
+        super().__init__(status_code=status.HTTP_404_NOT_FOUND, detail=detail)

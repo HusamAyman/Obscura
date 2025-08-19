@@ -30,7 +30,7 @@ class AccessTokenGeneratorImpl(AccessTokenGenerator):
         try:
             payload = jwt.decode(token, self.__secret_key, algorithms=[self.__algorithm])
             payload = {
-                "username": payload.get("sub"),
+                "sub": payload.get("sub"),
                 "iat": payload.get("iat"),
                 "exp": payload.get("exp"),
                 "type": payload.get("type")
@@ -42,9 +42,7 @@ class AccessTokenGeneratorImpl(AccessTokenGenerator):
 
 
 class RefreshTokenGeneratorImpl(RefreshTokenGenerator):
-    def __init__(self):
-        self.__algorith = os.getenv("ALGORITHM")
-        self.__secret_key = os.getenv("SECRET_KEY")
-        self.__refresh_token_expire_minutes = os.getenv("REFRESH_TOKEN_EXPIRE_DAYS")
     def encode(self) -> str:
-        return secrets.token_urlsafe(64)
+        token_id = str(uuid.uuid4())
+        secret = secrets.token_urlsafe(32)
+        return f"{token_id}:{secret}"

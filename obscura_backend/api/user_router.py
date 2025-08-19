@@ -1,7 +1,7 @@
 from infrastructure.repositories_impl.user_repo_impl import UserRepoImpl
 from application.use_cases.users.create_new_user import CreateAccountUseCase
 from api.schemas.create_account import CreateAccountSchema
-from infrastructure.database.dependencies import db_dependency
+from api.dependencies.database_dep import db_dependency
 from infrastructure.services.recovery_key_generator import SecureRecoveryKeyGenerator
 from api.exceptions.excpetions import HTTPUserAlreadyExists, InternalServerError
 from application.exceptions.exceptions import UserAlreadyExists, ApplicationBug

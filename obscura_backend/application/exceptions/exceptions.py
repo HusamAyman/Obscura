@@ -15,7 +15,7 @@ class UserAlreadyExists(ApplicationException):
         super().__init__(f"User '{username}' already exists.")
 
 class UserNotFound(ApplicationException):
-    """Exception raised when the username not found in the database"""
+    """Exception raised when the username not found in the repository"""
     def __inint__(self, username: str):
         super().__init__(f"Uesr '{username}' does not exist")
 
@@ -23,3 +23,9 @@ class UnAuthorizedAccess(ApplicationException):
     """Exception raised when the user enters wrong password"""
     def __init__(self):
         super().__init__("UnAuthorized Access")
+
+
+class TokenNotFound(ApplicationException):
+    """Exception raised when user token not found in the repository"""
+    def __init__(self):
+        super().__init__("Token Not Found.")
