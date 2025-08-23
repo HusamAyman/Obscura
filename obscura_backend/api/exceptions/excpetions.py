@@ -30,8 +30,8 @@ class HTTPUserNotFound(HTTPException):
 
 class HTTPUnauthorizedAccess(HTTPException):
     """Exception raised when the user enters wrong username or password"""
-    def __init__(self):
-        detail = "Wrong username or password."
+    def __init__(self, message: str = ""):
+        detail = f"Access denied .{message}"
         super().__init__(status_code=status.HTTP_401_UNAUTHORIZED, detail=detail)
 
 
@@ -40,3 +40,23 @@ class HTTPTokenNotFound(HTTPException):
     def __init__(self):
         detail = "User token not found."
         super().__init__(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
+
+
+class HTTPWrongPassword(HTTPException):
+    """Exception raised when the user to change password then enters wrong old password"""
+    def __init__(self):
+        detail = "Wrong Password."
+        super().__init__(status_code=status.HTTP_400_BAD_REQUEST, detail=detail)
+
+
+class HTTPDuplicatePassword(HTTPException):
+    """Exception raised when the new password is same as old password"""
+    def __init__(self):
+        detail = "New Password cannot be same as old password."
+        super().__init__(status_code=status.HTTP_400_BAD_REQUEST, detail=detail)
+
+class HTTPInvalidRecoveryKey(HTTPException):
+    """Exception raised when the user provides wrong recovery key"""
+    def __init__(self):
+        detail = "Invalid recovery key, please make sure you have entered the correct recovery key."
+        super().__init__(status_code=status.HTTP_400_BAD_REQUEST, detail=detail)

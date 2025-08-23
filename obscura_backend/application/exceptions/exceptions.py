@@ -29,3 +29,19 @@ class TokenNotFound(ApplicationException):
     """Exception raised when user token not found in the repository"""
     def __init__(self):
         super().__init__("Token Not Found.")
+
+
+class WrongPassword(ApplicationException):
+    """Exception raised when the user enters wrong password"""
+    def __init__(self):
+        super().__init__("Wrong Password.")
+
+class DuplicatePassword(ApplicationException):
+    """Exception raised when the new password is same as old password"""
+    def __init__(self):
+        super().__init__("New Password cannot be same as old password.")
+
+class InvalidRecoveryKey(ApplicationException):
+    """Exception raised when the user enters wrong recovery key"""
+    def __init__(self):
+        super().__init__("Invalid revovery key.")

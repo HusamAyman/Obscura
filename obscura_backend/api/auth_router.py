@@ -44,7 +44,7 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     except UserNotFound:
         raise HTTPUserNotFound(form_data.username)
     except UnAuthorizedAccess:
-        raise HTTPUnauthorizedAccess()
+        raise HTTPUnauthorizedAccess("Wrong username or password.")
 
 
 @router.post("/tokens/refresh", status_code=201)
@@ -67,4 +67,4 @@ async def refresh_access_token(refresh_token: str, request: Request, db: db_depe
     except TokenNotFound:
         raise HTTPTokenNotFound()
     except UnAuthorizedAccess:
-        raise HTTPUnauthorizedAccess()
+        raise HTTPUnauthorizedAccess("Invalid refresh token or unattended access attempt.")

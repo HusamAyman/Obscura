@@ -27,23 +27,19 @@ class UserRepoImpl(UserRepository):
                 self.session.rollback()
                 raise Exception()
     
-    def update(self, user_id: int, first_name: str, last_name: str) -> None:
-        user = self.session.query(User).filter(User.user_id == user_id).first()
-        # TODO: edit this code and add exception for user not found
-        if user:
-            user.first_name = first_name
-            user.last_name = last_name
-            self.session.commit()
+    def update(self, username: str, first_name: str, last_name: str) -> None:
+        user = self.session.query(User).filter(User.username == username).first()
+        user.first_name = first_name
+        user.last_name = last_name
+        self.session.commit()
 
-    def delete(self, user_id: int, recovery_key: str) -> None:
-        user = self.session.query(User).filter(User.user_id == user_id, User.recovery_key == recovery_key).first()  
-        if user:
-            self.session.delete(user)
-            self.session.commit()
+    def delete(self, username: str, recovery_key: str) -> None:
+        user = self.session.query(User).filter(User.username == username, User.recovery_key == recovery_key).first()  
+        self.session.delete(user)
+        self.session.commit()
 
     def read(self, username: str) -> UserEntity:
         user = self.session.query(User).filter(User.username == username).first()
-        # TODO: edit this code and add exception for user not found
         if user is  None:
             return None
         user_info = UserEntity(
@@ -55,9 +51,8 @@ class UserRepoImpl(UserRepository):
         )
         return user_info
         
-    def update_password(self, user_id: int, new_password: str) -> None:
-        user = self.session.query(User).filter(User.user_id == user_id).first() 
-        # TODO: edit this code and add exception for user not found
-        if user:
-            user.hashed_password = new_password
-            self.session.commit()
+    def update_password(self, username: str, new_password: str) -> None:
+        user = self.session.query(User).filter(User.username == username).first() 
+        user.hashed_password = new_password
+        self.session.commit()
+        self.session.refresh(user)

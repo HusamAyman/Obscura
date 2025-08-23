@@ -29,7 +29,7 @@ class RefreshUseCase:
         user_os = ua_info["os"]
         user_browser = ua_info["browser"]
         if db_model.user_agent != user_agent:
-            if db_model.user_os != user_os or db_model.user_browser != user_browser:
+            #if db_model.user_os != user_os or db_model.user_browser != user_browser:
                 self.repo.update(
                     token_id=token_id,
                     new_token_id=token_id,

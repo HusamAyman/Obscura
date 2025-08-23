@@ -10,13 +10,13 @@ class UserEntity:
         self.hashed_password = hashed_password
         self.recovery_key = recovery_key
         self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-    def has_recovery_key(self) -> bool:
-        if self.recovery_key is None:
-            return False
-        return True
+    def validate_recovery_key(self, recovery_key: str) -> bool:
+        return self.pwd_context.verify(recovery_key, self.recovery_key)
     def create_hash_password(self, password: str) -> str:
         self.hashed_password = self.pwd_context.hash(password)
         return self.hashed_password
+    def validate_password(self, input_password: str) -> bool:
+        return self.pwd_context.verify(input_password, self.hashed_password)
     def hash_recovery_key(self, recovery_key: str) -> str:
         self.recovery_key = self.pwd_context.hash(recovery_key)
         return self.recovery_key
