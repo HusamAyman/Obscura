@@ -5,9 +5,7 @@ from api.auth_router import router as auth_router
 
 
 app = FastAPI(
-    title="Obscura REST API",
-    version="1.0.0",
-    description="A REST API for Obscura"
+    title="Obscura REST API", version="1.0.0", description="A REST API for Obscura"
 )
 
 app.add_middleware(
@@ -20,3 +18,4 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(user_router)
+
